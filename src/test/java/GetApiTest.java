@@ -42,7 +42,6 @@ public class GetApiTest {
                 .get(endpoint + status);
         response.prettyPrint();
         String finalStatus = response.jsonPath().getString("status[0]");
-        System.out.println(response.jsonPath().getString("status[0]"));
 
         String sc = String.valueOf(response.getStatusCode());
 
