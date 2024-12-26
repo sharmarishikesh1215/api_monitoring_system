@@ -12,16 +12,17 @@ import static io.restassured.RestAssured.given;
 
 public class GetApiTest {
 
-    final String basePath = "https://petstore.swagger.io/v2/swagger.json";
+
+    final String finalPath = "https://petstore.swagger.io/v2";
     final String workbookPath = "src/test/java/resources/GetRequest.xlsx";
-    String authToken = "";
 
     @Test(description = "Base URL Test")
     @Severity(SeverityLevel.BLOCKER)
     public void baseTest() {
+        final String path = "/swagger.json";
         Response response = given()
                 .header("Content-Type", "application/json")
-                .get(basePath);
+                .get(finalPath + path);
         response.prettyPrint();
         if (response.getStatusCode() != 200)
             Assert.fail();
@@ -39,13 +40,27 @@ public class GetApiTest {
 
         Response response = given()
                 .header("Content-Type", "application/json")
-                .get(endpoint + status);
+                .get(finalPath + endpoint + status);
         response.prettyPrint();
-        String finalStatus = response.jsonPath().getString("status[0]");
 
         String sc = String.valueOf(response.getStatusCode());
 
-        if (!sc.equals(statusCode) && !status.equals(finalStatus))
+        if (!sc.equals(statusCode))
             Assert.fail();
+    }
+
+    @DataProvider(name = "store")
+    public Object[][] storeDataProvider() throws IOException {
+        return ExcelDataExtractor.testDataExtractor(workbookPath, "store");
+    }
+
+    @Test(dataProvider = "store")
+    public void store(String apiName, String endPoint,  String statusCode) {
+        System.out.println("API Name: " + apiName);
+
+        Response response = given()
+                .get(finalPath + endPoint);
+        response.prettyPrint();
+        Assert.assertEquals(String.valueOf(response.getStatusCode()), statusCode);
     }
 }
