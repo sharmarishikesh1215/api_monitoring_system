@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class SlackUpdater extends TestNGListener implements ITestListener {
 
-    private static String urlSlackWebHook = "https://hooks.slack.com/services/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";
+    private static String urlSlackWebHook = "https://hooks.slack.com/services/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";
     private static String channelName = "apimonitoring";
     private static String userOAuthToken= "xoxb-8222274585907-8222413251090-ObPUy03LOBKMCk8QFD6oX7cZ";
 

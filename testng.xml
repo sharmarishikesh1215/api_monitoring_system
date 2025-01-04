@@ -3,11 +3,14 @@
 <suite name="All Test Suite">
     <test verbose="2" preserve-order="true" name="C:/Users/rishi/Desktop/github/api_monitoring_system">
         <classes>
-            <class name="GetApiTest">
+            <class name="ApiTest">
                 <methods>
                     <include name="baseTest" />
                     <include name="findByStatus" />
                     <include name="store" />
+                    <include name="getUserLogin" />
+                    <include name="getUserLogout" />
+                    <include name="postCreateUser" />
                 </methods>
             </class>
         </classes>
